@@ -67,10 +67,19 @@ public class PosController {
 
   @RequestMapping(value = "/pos/change_commission", method = RequestMethod.GET)
   public LejiaResult changeCommission(@RequestParam String id,
-                                       @RequestParam BigDecimal commission) {
-    merchantPosService.changePosCommission(id,commission);
+                                      @RequestParam BigDecimal commission) {
+    merchantPosService.changePosCommission(id, commission);
     return LejiaResult.ok();
   }
 
+  @RequestMapping(value = "/pos/save_pos", method = RequestMethod.POST)
+  public LejiaResult savePosMachine(@RequestBody MerchantPos merchantPos) {
+    try {
+      merchantPosService.savePosMachine(merchantPos);
+      return LejiaResult.build(200, "信息添加成功!");
+    } catch (Exception e) {
+      return LejiaResult.build(500, "信息保存失败!");
+    }
+  }
 
 }
