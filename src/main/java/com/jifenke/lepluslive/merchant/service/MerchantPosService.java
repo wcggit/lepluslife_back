@@ -100,4 +100,12 @@ public class MerchantPosService {
     merchantPos.setLjCommission(commission);
     merchantPosRepository.save(merchantPos);
   }
+
+  @Transactional(propagation = Propagation.REQUIRED,readOnly = false)
+  public void savePosMachine(MerchantPos merchantPos) {
+    if(merchantPos.getId()==null) {
+      merchantPos.setCreatedDate(new Date());
+      merchantPosRepository.save(merchantPos);
+    }
+  }
 }
