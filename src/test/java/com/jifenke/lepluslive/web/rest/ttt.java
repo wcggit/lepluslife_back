@@ -1,4 +1,4 @@
-//package com.jifenke.lepluslive.web.rest;
+package com.jifenke.lepluslive.web.rest;//package com.jifenke.lepluslive.web.rest;
 //
 //import com.jifenke.lepluslive.Application;
 //import com.jifenke.lepluslive.barcode.BarcodeConfig;
@@ -10,11 +10,18 @@
 //import com.jifenke.lepluslive.merchant.domain.entities.MerchantUser;
 //import com.jifenke.lepluslive.merchant.repository.MerchantRepository;
 //import com.jifenke.lepluslive.merchant.service.MerchantService;
+//import com.jifenke.lepluslive.order.repository.OffLineOrderRepository;
+//import com.jifenke.lepluslive.order.repository.OffLineOrderShareRepository;
 //import com.jifenke.lepluslive.order.service.FinanicalStatisticService;
 //import com.jifenke.lepluslive.order.service.OffLineOrderService;
 //import com.jifenke.lepluslive.partner.domain.entities.Partner;
+//import com.jifenke.lepluslive.score.repository.ScoreADetailRepository;
 //import com.jifenke.lepluslive.score.repository.ScoreARepository;
 //import com.jifenke.lepluslive.score.repository.ScoreBRepository;
+//import com.jifenke.lepluslive.scoreAAccount.repository.ScoreAAccountDetailRepository;
+//import com.jifenke.lepluslive.scoreAAccount.repository.ScoreAAccountRepository;
+//import com.jifenke.lepluslive.scoreAAccount.service.ScoreAAccountDetailService;
+//import com.jifenke.lepluslive.scoreAAccount.service.ScoreAAccountService;
 //import com.jifenke.lepluslive.user.repository.LeJiaUserRepository;
 //import com.jifenke.lepluslive.user.repository.WeiXinUserRepository;
 //
@@ -36,8 +43,8 @@
 //import javax.inject.Inject;
 //
 ///**
-// * Created by wcg on 16/4/15.
-// */
+//* Created by wcg on 16/4/15.
+//*/
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@SpringApplicationConfiguration(classes = Application.class)
 //@WebAppConfiguration
@@ -75,6 +82,37 @@
 //
 //  @Inject
 //  private FinanicalStatisticService finanicalStatisticService;
+//
+//
+//  @Inject
+//  private ScoreAAccountService scoreAAccountService;
+//
+//  @Inject
+//  private ScoreAAccountDetailService scoreAAccountDetailService;
+//
+//
+//  @Inject
+//  private ScoreAAccountDetailRepository scoreAAccountDetailRepository;
+//  @Inject
+//  private ScoreAAccountRepository scoreAAccountRepository;
+//
+//  @Inject
+//  private ScoreADetailRepository scoreADetailRepository;
+//  @Inject
+//  private OffLineOrderShareRepository offLineOrderShareRepository;
+//
+//  @Inject
+//  private OffLineOrderRepository offLineOrderRepository;
+//
+//  //添加所有红包账户明细和红包账户
+//  @Test
+//  public void addAllScoreAAccountDetail() {
+//    scoreAAccountDetailService.addAllScoreAAccountDetail();
+//    scoreAAccountService.addAllScoreAAccount();
+//  }
+//
+//
+//
 //
 //
 //  @Test

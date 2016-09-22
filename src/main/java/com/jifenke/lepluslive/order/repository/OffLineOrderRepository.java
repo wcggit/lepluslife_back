@@ -1,7 +1,6 @@
 package com.jifenke.lepluslive.order.repository;
 
 import com.jifenke.lepluslive.order.domain.entities.OffLineOrder;
-import com.jifenke.lepluslive.order.domain.entities.OnLineOrder;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,4 +35,7 @@ public interface OffLineOrderRepository extends JpaRepository<OffLineOrder, Long
                  + " ) o "
                  + "WHERE w.le_jia_user_id = o.le_jia_user_id AND w.state = 1 ",nativeQuery = true)
   List<Object[]> countUserByOffLineOrder();
+
+  @Query(value = "SELECT * FROM off_line_order WHERE order_sid=?1", nativeQuery = true)
+  OffLineOrder findOneByOrderSid(String orderSid);
 }
