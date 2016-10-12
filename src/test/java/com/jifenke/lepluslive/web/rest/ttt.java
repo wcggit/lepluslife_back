@@ -5,6 +5,7 @@ import com.jifenke.lepluslive.barcode.BarcodeConfig;
 import com.jifenke.lepluslive.barcode.service.BarcodeService;
 import com.jifenke.lepluslive.filemanage.service.FileImageService;
 import com.jifenke.lepluslive.global.config.Constants;
+import com.jifenke.lepluslive.global.util.MD5Util;
 import com.jifenke.lepluslive.global.util.MvUtil;
 import com.jifenke.lepluslive.merchant.domain.entities.Merchant;
 import com.jifenke.lepluslive.merchant.domain.entities.MerchantUser;
@@ -29,8 +30,15 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -103,6 +111,7 @@ public class ttt {
     System.out.println(end.getTime()-start.getTime());
 
   }
+
 
 ////  public static void main(String[] args) {
 ////    int x[][] = new int[9][9];
