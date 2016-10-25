@@ -1,6 +1,7 @@
 package com.jifenke.lepluslive.merchant.domain.entities;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -129,5 +130,70 @@ public class MerchantPos {
 
   public void setCreditCardCommission(BigDecimal creditCardCommission) {
     this.creditCardCommission = creditCardCommission;
+  }
+
+  private Date createdDate;                  // 创建时间
+
+  private BigDecimal wxProcedureFee;         // 微信手续费
+  private BigDecimal aliProcedureFee;        // 阿里手续费
+  private BigDecimal streamScoreA;           // 导流订单参数：   红包比
+  private BigDecimal streamScoreB;           // 导流订单参数：   积分比
+  private BigDecimal lejiaScoreA;            // 会员订单参数：   红包比
+  private BigDecimal lejiaScoreB;            // 会员订单参数：   积分比
+
+  public BigDecimal getStreamScoreA() {
+    return streamScoreA;
+  }
+
+  public void setStreamScoreA(BigDecimal streamScoreA) {
+    this.streamScoreA = streamScoreA;
+  }
+
+  public BigDecimal getStreamScoreB() {
+    return streamScoreB;
+  }
+
+  public void setStreamScoreB(BigDecimal streamScoreB) {
+    this.streamScoreB = streamScoreB;
+  }
+
+  public BigDecimal getWxProcedureFee() {
+    return wxProcedureFee;
+  }
+
+  public void setWxProcedureFee(BigDecimal wxProcedureFee) {
+    this.wxProcedureFee = wxProcedureFee;
+  }
+
+  public BigDecimal getAliProcedureFee() {
+    return aliProcedureFee;
+  }
+
+  public void setAliProcedureFee(BigDecimal aliProcedureFee) {
+    this.aliProcedureFee = aliProcedureFee;
+  }
+
+  public Date getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(Date createDate) {
+    this.createdDate = createDate;
+  }
+
+  public BigDecimal getLejiaScoreA() {
+    return lejiaScoreA;
+  }
+
+  public void setLejiaScoreA(BigDecimal lejiaScoreA) {
+    this.lejiaScoreA = lejiaScoreA;
+  }
+
+  public BigDecimal getLejiaScoreB() {
+    return lejiaScoreB;
+  }
+
+  public void setLejiaScoreB(BigDecimal lejiaScoreB) {
+    this.lejiaScoreB = lejiaScoreB;
   }
 }

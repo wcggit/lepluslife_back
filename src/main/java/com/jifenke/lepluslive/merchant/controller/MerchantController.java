@@ -10,10 +10,7 @@ import com.jifenke.lepluslive.merchant.domain.entities.BankName;
 import com.jifenke.lepluslive.merchant.domain.entities.Merchant;
 import com.jifenke.lepluslive.merchant.domain.entities.MerchantBank;
 import com.jifenke.lepluslive.merchant.domain.entities.MerchantUser;
-import com.jifenke.lepluslive.merchant.service.BankNameService;
-import com.jifenke.lepluslive.merchant.service.CityService;
-import com.jifenke.lepluslive.merchant.service.MerchantService;
-import com.jifenke.lepluslive.merchant.service.MerchantWeiXinUserService;
+import com.jifenke.lepluslive.merchant.service.*;
 import com.jifenke.lepluslive.partner.domain.entities.Partner;
 import com.jifenke.lepluslive.partner.service.PartnerService;
 
@@ -66,6 +63,9 @@ public class MerchantController {
   private MerchantWeiXinUserService merchantWeiXinUserService;
 
   @Inject
+  private MerchantPosService merchantPosService;
+
+  @Inject
   private BankNameService bankNameService;
 
   @RequestMapping(value = "/merchant", method = RequestMethod.GET)
@@ -86,9 +86,12 @@ public class MerchantController {
     //获取每个合伙人的锁定会员数
     List<Merchant> merchants = page.getContent();
     List<Integer> binds = merchantService.findBindLeJiaUsers(merchants);
+    //获取每个商户的pos机数量
+    List<Long> posCounts = merchantPosService.countPosByMerchants(merchants);
     List<Object> list = new ArrayList<>();
     list.add(page);
     list.add(binds);
+    list.add(posCounts);
     return LejiaResult.ok(list);
   }
 
