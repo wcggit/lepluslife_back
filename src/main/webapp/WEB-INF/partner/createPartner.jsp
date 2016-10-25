@@ -165,7 +165,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
-                            <button type="button" class="btn btn-primary" onclick="submitPartner()">
+                            <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitPartner()">
                                 提交
                             </button>
                             <a type="button" class="btn btn-primary btn-return" style="margin:10px;"
@@ -263,6 +263,7 @@
             return;
         }
         if (${partner!=null}) {
+            $("#btnSubmit").attr("disabled",true);
             partner.id = '${partner.id}';
             $.ajax({
                        type: "put",
@@ -275,6 +276,7 @@
                        }
                    });
         }else{
+            $("#btnSubmit").attr("disabled",true);
             $.ajax({
                        type: "post",
                        url: "/manage/partner",
