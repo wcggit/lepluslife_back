@@ -159,13 +159,37 @@
                         <label class="col-sm-2 control-label">每日发福利次数</label>
 
                         <div class="col-sm-4">
-                            <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" class="form-control" id="benefitTime"
+                            <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                   class="form-control" id="benefitTime"
                                    value="${partner.benefitTime}">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">发放的红包</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                   class="form-control" id="benefitScoreA"
+                                    >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">发放的积分</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                   class="form-control" id="benefitScoreB"
+                                    >
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
+<<<<<<< HEAD
                             <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitPartner()">
+=======
+                            <button type="button" class="btn btn-primary" id="subPartner"
+                                    >
+>>>>>>> 513f65c0020964721e140ba6a6e6901cd06d2126
                                 提交
                             </button>
                             <a type="button" class="btn btn-primary btn-return" style="margin:10px;"
@@ -182,6 +206,10 @@
 </div>
 <script src="${resourceUrl}/js/bootstrap.min.js"></script>
 <script>
+    if (${partner!=null}) {
+        $("#benefitScoreA").css("display", "none");
+        $("#benefitScoreB").css("display", "none");
+    }
     $("#partnerManager").find("option[value='${partner.partnerManager.id}']").attr("selected",
                                                                                    true);
     if (${partner!=null}) {
@@ -209,32 +237,50 @@
         $('.bank').css({display: "none"});
         $('.zhifubao').css({display: "block"});
     })
+
     function submitPartner() {
+        $("#subPartner").unbind("click");
         var partner = {};
         var partnerManager = {};
         partnerManager.id = $("#partnerManager").val();
         partner.partnerManager = partnerManager;
-        if($("#partnerName").val()==null||$("#partnerName").val()==""){
+        if ($("#partnerName").val() == null || $("#partnerName").val() == "") {
             alert("请输入合伙人姓名");
+            $("#subPartner").bind("click", function () {
+                submitPartner()
+            });
             return;
         }
-        if($("#partnerPhone").val()==null||$("#partnerPhone").val()==""){
+        if ($("#partnerPhone").val() == null || $("#partnerPhone").val() == "") {
             alert("请输入合伙人电话");
+            $("#subPartner").bind("click", function () {
+                submitPartner()
+            });
             return;
         }
-        if($("#merchantLimit").val()==null||$("#merchantLimit").val()==""){
+        if ($("#merchantLimit").val() == null || $("#merchantLimit").val() == "") {
             alert("请输入商户限制");
+            $("#subPartner").bind("click", function () {
+                submitPartner()
+            });
             return;
         }
-        if($("#userLimit").val()==null||$("#userLimit").val()==""){
+        if ($("#userLimit").val() == null || $("#userLimit").val() == "") {
             alert("请输入会员限制");
+            $("#subPartner").bind("click", function () {
+                submitPartner()
+            });
             return;
         }
-        if($("#benefitTime").val()==null||$("#benefitTime").val()==""){
+        if ($("#benefitTime").val() == null || $("#benefitTime").val() == "") {
             alert("请输入每日发放限制");
+            $("#subPartner").bind("click", function () {
+                submitPartner()
+            });
             return;
         }
         partner.partnerName = $("#partnerName").val();
+
         partner.name = $("#partnerName").val();
         partner.phoneNumber = $("#partnerPhone").val();
         partner.merchantLimit = $("#merchantLimit").val();
@@ -250,16 +296,25 @@
             partner.payee = $("#alipayPayee").val();
             partner.bankName = '支付宝';
         }
-        if(partner.payee==null||partner.payee==""){
+        if (partner.payee == null || partner.payee == "") {
             alert("请输入收款人");
+            $("#subPartner").bind("click", function () {
+                submitPartner()
+            });
             return;
         }
-        if(partner.bankNumber==null||partner.bankNumber==""){
+        if (partner.bankNumber == null || partner.bankNumber == "") {
             alert("请输入银行卡号");
+            $("#subPartner").bind("click", function () {
+                submitPartner()
+            });
             return;
         }
-        if(partner.bankName==null||partner.bankName==""){
+        if (partner.bankName == null || partner.bankName == "") {
             alert("请输入银行");
+            $("#subPartner").bind("click", function () {
+                submitPartner()
+            });
             return;
         }
         if (${partner!=null}) {
@@ -272,24 +327,35 @@
                        data: JSON.stringify(partner),
                        success: function (data) {
                            alert(data.msg);
-                               location.href = "/manage/partner";
+                           location.href = "/manage/partner";
                        }
                    });
+<<<<<<< HEAD
         }else{
             $("#btnSubmit").attr("disabled",true);
+=======
+        } else {
+            var partnerDto = {};
+            partnerDto.partner = partner;
+            partnerDto.scoreA = $("#benefitScoreA").val();
+            partnerDto.scoreB = $("#benefitScoreB").val();
+>>>>>>> 513f65c0020964721e140ba6a6e6901cd06d2126
             $.ajax({
                        type: "post",
                        url: "/manage/partner",
                        contentType: "application/json",
-                       data: JSON.stringify(partner),
+                       data: JSON.stringify(partnerDto),
                        success: function (data) {
                            alert(data.msg);
-                               location.href = "/manage/partner";
+                           location.href = "/manage/partner";
                        }
                    });
         }
 
     }
+    $("#subPartner").bind("click", function () {
+        submitPartner()
+    });
 </script>
 </body>
 </html>
