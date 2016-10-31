@@ -401,6 +401,13 @@
                            }
                            contentStr +=
                            '<td>' + content[i].ljCommission + '%</td>'
+                           if(posCount[i]==0) {
+                               contentStr +=
+                                       '<td>未进件</td>'
+                           }else {
+                               contentStr +=
+                                       '<td>'+posCount[i]+'个</td>'
+                           }
                            if (content[i].state == 0) {
                                contentStr +=
                                '<td>未开启</td>'
@@ -408,13 +415,7 @@
                                contentStr +=
                                '<td>已开启</td>'
                            }
-                           if(posCount[i]==0) {
-                               contentStr +=
-                               '<td>未进件</td>'
-                           }else {
-                               contentStr +=
-                               '<td>'+posCount[i]+'个</td>'
-                           }
+
                            if (content[i].receiptAuth == 0) {
                                contentStr +=
                                '<td>未开通</td>'

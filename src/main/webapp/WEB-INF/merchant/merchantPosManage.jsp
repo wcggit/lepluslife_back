@@ -167,7 +167,7 @@
                                         </c:when>
                                         <c:when test="${pos.wxCommission==null&&pos.wxProcedureFee!=null}">
                                             <td>
-                                                <h5>手续费：${pos.aliCommission} %  </h5>
+                                                <h5>手续费：${pos.wxProcedureFee} %  </h5>
                                                 <h5>佣金： 未开通 </h5>
                                             </td>
                                         </c:when>
@@ -185,14 +185,14 @@
                                         </c:when>
                                         <c:when test="${pos.aliCommission==null&&pos.aliProcedureFee!=null}">
                                             <td>
-                                                <h5>手续费：${pos.aliCommission} %  </h5>
+                                                <h5>手续费：${pos.aliProcedureFee} %  </h5>
                                                 <h5>佣金： 未开通 </h5>
                                             </td>
                                         </c:when>
                                         <c:otherwise>
                                             <td>
-                                                <h5>手续费：${pos.aliCommission} %  </h5>
-                                                <h5>佣金： ${pos.aliProcedureFee} % </h5>
+                                                <h5>手续费：${pos.aliProcedureFee} %  </h5>
+                                                <h5>佣金： ${pos.aliCommission} % </h5>
                                             </td>
                                         </c:otherwise>
                                     </c:choose>
