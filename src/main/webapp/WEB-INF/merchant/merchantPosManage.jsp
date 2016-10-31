@@ -154,11 +154,12 @@
                                          <h5>&nbsp;&nbsp;借记卡 ${pos.debitCardCommission}% &nbsp; 封顶 ${pos.ceil}</h5>
                                          <h5>&nbsp;&nbsp;贷记卡 ${pos.creditCardCommission}% &nbsp;
                                              <c:if test="${pos.bankCommission!=null}">
-                                                佣金 ${pos.bankCommission} %</h5>
+                                                <h5>佣金 ${pos.bankCommission} %</h5>
                                              </c:if>
                                              <c:if test="${pos.bankCommission==null}">
-                                                佣金 未开通</h5>
+                                                <h5>佣金 未开通</h5>
                                              </c:if>
+
                                     </td>
                                     <!--微信-->
                                     <c:choose>
