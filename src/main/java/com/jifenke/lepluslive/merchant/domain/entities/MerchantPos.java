@@ -1,6 +1,7 @@
 package com.jifenke.lepluslive.merchant.domain.entities;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class MerchantPos {
 
   private String psamCard;
 
-  private BigDecimal debitCardCommission; //借记卡非会员佣金比
+  private BigDecimal debitCardCommission; //借记卡非会员佣金比  (手续费)
 
   private BigDecimal ljCommission; //会员刷卡消费佣金比 或者纯红包消费佣金比
 
@@ -37,7 +38,7 @@ public class MerchantPos {
 
   private BigDecimal aliCommission; //阿里非会员佣金比
 
-  private BigDecimal creditCardCommission; //贷记卡非会员佣金比
+  private BigDecimal creditCardCommission; //贷记卡非会员佣金比  (手续费)
 
   private Long ceil; //借记卡非会员封顶手续费
 
@@ -189,5 +190,44 @@ public class MerchantPos {
 
   public void setCreditCardCommission(BigDecimal creditCardCommission) {
     this.creditCardCommission = creditCardCommission;
+  }
+
+  private Date createdDate;                  // 创建时间
+
+  private BigDecimal wxProcedureFee;         // 微信手续费
+  private BigDecimal aliProcedureFee;        // 阿里手续费
+
+  private BigDecimal bankCommission;         // 银行佣金
+
+  public BigDecimal getWxProcedureFee() {
+    return wxProcedureFee;
+  }
+
+  public void setWxProcedureFee(BigDecimal wxProcedureFee) {
+    this.wxProcedureFee = wxProcedureFee;
+  }
+
+  public BigDecimal getAliProcedureFee() {
+    return aliProcedureFee;
+  }
+
+  public void setAliProcedureFee(BigDecimal aliProcedureFee) {
+    this.aliProcedureFee = aliProcedureFee;
+  }
+
+  public Date getCreatedDate() {
+    return createdDate;
+  }
+
+  public void setCreatedDate(Date createDate) {
+    this.createdDate = createDate;
+  }
+
+  public BigDecimal getBankCommission() {
+    return bankCommission;
+  }
+
+  public void setBankCommission(BigDecimal bankCommission) {
+    this.bankCommission = bankCommission;
   }
 }

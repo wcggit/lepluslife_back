@@ -184,8 +184,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-4">
+<<<<<<< HEAD
+                            <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitPartner()">
+=======
                             <button type="button" class="btn btn-primary" id="subPartner"
                                     >
+>>>>>>> 513f65c0020964721e140ba6a6e6901cd06d2126
                                 提交
                             </button>
                             <a type="button" class="btn btn-primary btn-return" style="margin:10px;"
@@ -314,6 +318,7 @@
             return;
         }
         if (${partner!=null}) {
+            $("#btnSubmit").attr("disabled",true);
             partner.id = '${partner.id}';
             $.ajax({
                        type: "put",
@@ -325,11 +330,16 @@
                            location.href = "/manage/partner";
                        }
                    });
+<<<<<<< HEAD
+        }else{
+            $("#btnSubmit").attr("disabled",true);
+=======
         } else {
             var partnerDto = {};
             partnerDto.partner = partner;
             partnerDto.scoreA = $("#benefitScoreA").val();
             partnerDto.scoreB = $("#benefitScoreB").val();
+>>>>>>> 513f65c0020964721e140ba6a6e6901cd06d2126
             $.ajax({
                        type: "post",
                        url: "/manage/partner",
