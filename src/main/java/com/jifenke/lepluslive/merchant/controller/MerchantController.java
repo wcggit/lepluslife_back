@@ -250,10 +250,12 @@ public class MerchantController {
 
   @RequestMapping(value = "/merchant/pos_manage/{id}", method = RequestMethod.GET)
   public ModelAndView posManage(@PathVariable Long id, Model model) {
-    List list = merchantService.findAllPosByMerchant(merchantService.findMerchantById(id));
+    Merchant merchant = merchantService.findMerchantById(id);
+    List list = merchantService.findAllPosByMerchant(merchant);
     model.addAttribute(list);
     model.addAttribute("posList",list);
     model.addAttribute("merchantId",id);
+    model.addAttribute("merchantName",merchant.getName());
     return MvUtil.go("/merchant/merchantPosManage");
   }
 

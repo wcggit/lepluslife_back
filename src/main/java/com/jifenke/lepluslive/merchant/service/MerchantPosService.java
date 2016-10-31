@@ -110,7 +110,6 @@ public class MerchantPosService {
     }else {
       MerchantPos existMerchantPos = merchantPosRepository.findById(merchantPos.getId());
       existMerchantPos.setPosId(merchantPos.getPosId());
-      existMerchantPos.setPsamCard(merchantPos.getPsamCard());
       existMerchantPos.setCeil(merchantPos.getCeil());
       existMerchantPos.setAliCommission(merchantPos.getAliCommission());
       existMerchantPos.setAliProcedureFee(merchantPos.getAliProcedureFee());
@@ -118,10 +117,11 @@ public class MerchantPosService {
       existMerchantPos.setWxProcedureFee(merchantPos.getWxProcedureFee());
       existMerchantPos.setCreditCardCommission(merchantPos.getCreditCardCommission());
       existMerchantPos.setDebitCardCommission(merchantPos.getDebitCardCommission());
-      existMerchantPos.setStreamScoreA(merchantPos.getStreamScoreA());
-      existMerchantPos.setStreamScoreB(merchantPos.getStreamScoreB());
-      existMerchantPos.setLejiaScoreA(merchantPos.getLejiaScoreA());
-      existMerchantPos.setLejiaScoreB(merchantPos.getLejiaScoreB());
+      existMerchantPos.setScoreARebate(merchantPos.getScoreARebate());
+      existMerchantPos.setScoreBRebate(merchantPos.getScoreBRebate());
+      existMerchantPos.setBankCommission(merchantPos.getBankCommission());
+      existMerchantPos.setUserScoreARebate(merchantPos.getUserScoreARebate());
+      existMerchantPos.setUserScoreBRebate(merchantPos.getUserScoreBRebate());
     }
 
   }

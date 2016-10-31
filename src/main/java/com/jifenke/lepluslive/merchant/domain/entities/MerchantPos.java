@@ -30,7 +30,7 @@ public class MerchantPos {
 
   private String psamCard;
 
-  private BigDecimal debitCardCommission; //借记卡非会员佣金比
+  private BigDecimal debitCardCommission; //借记卡非会员佣金比  (手续费)
 
   private BigDecimal ljCommission; //会员刷卡消费佣金比 或者纯红包消费佣金比
 
@@ -38,7 +38,7 @@ public class MerchantPos {
 
   private BigDecimal aliCommission; //阿里非会员佣金比
 
-  private BigDecimal creditCardCommission; //贷记卡非会员佣金比
+  private BigDecimal creditCardCommission; //贷记卡非会员佣金比  (手续费)
 
   private Long ceil; //借记卡非会员封顶手续费
 
@@ -196,26 +196,8 @@ public class MerchantPos {
 
   private BigDecimal wxProcedureFee;         // 微信手续费
   private BigDecimal aliProcedureFee;        // 阿里手续费
-  private BigDecimal streamScoreA;           // 导流订单参数：   红包比
-  private BigDecimal streamScoreB;           // 导流订单参数：   积分比
-  private BigDecimal lejiaScoreA;            // 会员订单参数：   红包比
-  private BigDecimal lejiaScoreB;            // 会员订单参数：   积分比
 
-  public BigDecimal getStreamScoreA() {
-    return streamScoreA;
-  }
-
-  public void setStreamScoreA(BigDecimal streamScoreA) {
-    this.streamScoreA = streamScoreA;
-  }
-
-  public BigDecimal getStreamScoreB() {
-    return streamScoreB;
-  }
-
-  public void setStreamScoreB(BigDecimal streamScoreB) {
-    this.streamScoreB = streamScoreB;
-  }
+  private BigDecimal bankCommission;         // 银行佣金
 
   public BigDecimal getWxProcedureFee() {
     return wxProcedureFee;
@@ -241,19 +223,11 @@ public class MerchantPos {
     this.createdDate = createDate;
   }
 
-  public BigDecimal getLejiaScoreA() {
-    return lejiaScoreA;
+  public BigDecimal getBankCommission() {
+    return bankCommission;
   }
 
-  public void setLejiaScoreA(BigDecimal lejiaScoreA) {
-    this.lejiaScoreA = lejiaScoreA;
-  }
-
-  public BigDecimal getLejiaScoreB() {
-    return lejiaScoreB;
-  }
-
-  public void setLejiaScoreB(BigDecimal lejiaScoreB) {
-    this.lejiaScoreB = lejiaScoreB;
+  public void setBankCommission(BigDecimal bankCommission) {
+    this.bankCommission = bankCommission;
   }
 }
