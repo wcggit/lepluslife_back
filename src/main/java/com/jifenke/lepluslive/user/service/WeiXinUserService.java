@@ -160,4 +160,12 @@ public class WeiXinUserService {
     }
   }
 
+
+  @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+  public WeiXinUser  findWeiXinUserByLeJiaUserId(Long id){
+    return weiXinUserRepository.findOne(id);
+  }
+
+
+
 }
