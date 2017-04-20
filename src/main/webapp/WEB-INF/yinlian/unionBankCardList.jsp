@@ -115,6 +115,7 @@
                             <option value="1">APP注册</option>
                             <option value="2">POS注册</option>
                             <option value="3">手动注册</option>
+                            <option value="4">公众号注册</option>
                         </select>
                     </div>
 
@@ -392,7 +393,10 @@
                         contentStr += '<td><span>已注册</span></td></tr>';
                     } else if (content[i].state == 0) {
                         contentStr += '<td><span>未注册</span></td></tr>';
-                    } else {
+                    }else if (content[i].state == 2) {
+                        contentStr += '<td><span>取消注册</span></td></tr>';
+                    }
+                    else {
                         contentStr += '<td><span>--</span></td></tr>';
                     }
 

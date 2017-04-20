@@ -76,33 +76,37 @@ public class UnionBankCardController {
 
         if (userSid != null && bankNumber != null && phone != null && userSid != "" && bankNumber != "" && phone != "") {
             LeJiaUser leJiaUser = userService.findUserBySid(userSid);
+            UnionBankCard unionBankCard= unionBankCardService.findUnionBankCardByNumber(bankNumber);
             if (leJiaUser != null) {
-                Map map = unionPayStoreService.register(bankNumber, phone);
-                if ("0000".equals(map.get("msg_rsp_code"))) {
-
-                    BankCard bankCard = new BankCard();
-                    UnionBankCard unionBankCard = new UnionBankCard();
-                    Date date = new Date();
-                    bankCard.setLeJiaUser(leJiaUser);
-                    bankCard.setBindDate(date);
-                    bankCard.setState(1);
-                    bankCard.setNumber(bankNumber);
-                    bankCard.setCardLength(bankNumber.length());
-                    bankCard.setPrefixNum(bankNumber.substring(0, 6));
-
-                    unionBankCard.setCreateDate(date);
-                    unionBankCard.setState(1);
+                if (unionBankCard == null) {
+                    unionBankCard = new UnionBankCard();
                     unionBankCard.setNumber(bankNumber);
-                    unionBankCard.setPhoneNumber(phone);
-                    unionBankCard.setRegisterWay(3);
-                    unionBankCard.setUserSid(userSid);
+                    unionBankCard.setCreateDate(new Date());
+                }
+                unionBankCard.setPhoneNumber(phone);
+                unionBankCard.setRegisterWay(3);
+                unionBankCard.setUserSid(leJiaUser.getUserSid());
+                if (unionBankCard.getState() != 1) {
+                    Map map = unionPayStoreService.register(bankNumber, phone);
 
-                    bankCardService.saveOne(bankCard);
-                    unionBankCardService.saveOne(unionBankCard);
-                    return LejiaResult.ok();
-
-                } else {
-                    return LejiaResult.build(501, "注册失败");
+                    if ("0000".equals(map.get("msg_rsp_code"))) {
+                        unionBankCard.setState(1);
+                        BankCard bankCard = new BankCard();
+                        Date date = new Date();
+                        bankCard.setLeJiaUser(leJiaUser);
+                        bankCard.setBindDate(date);
+                        bankCard.setState(1);
+                        bankCard.setNumber(bankNumber);
+                        bankCard.setCardLength(bankNumber.length());
+                        bankCard.setPrefixNum(bankNumber.substring(0, 6));
+                        bankCardService.saveOne(bankCard);
+                        unionBankCardService.saveOne(unionBankCard);
+                        return LejiaResult.ok();
+                    }else {
+                        return LejiaResult.build(501, "注册失败");
+                    }
+                }else {
+                    return LejiaResult.build(501, "该会员卡已注册");
                 }
             } else {
                 return LejiaResult.build(501, "未找到乐加会员");

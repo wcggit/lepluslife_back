@@ -77,4 +77,11 @@ public class UnionBankCardService {
     }
 
 
+
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+    public UnionBankCard findUnionBankCardByNumber(String number) {
+      return   unionBankCardRepository.findUnionBankCardByNumber(number);
+    }
+
+
 }
