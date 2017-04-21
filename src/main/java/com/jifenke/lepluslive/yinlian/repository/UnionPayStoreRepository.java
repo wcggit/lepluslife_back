@@ -23,4 +23,6 @@ public interface UnionPayStoreRepository extends JpaRepository<UnionPayStore, Lo
 
     Page findAll(Specification<UnionPayStore> whereClause, Pageable pageRequest);
 
+    UnionPayStore findUnionPayStoreByShopNumber(String shopNumber);
+
 }

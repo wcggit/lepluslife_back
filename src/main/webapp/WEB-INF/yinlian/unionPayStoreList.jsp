@@ -428,6 +428,10 @@
         $("#userGeneralACommission2").val("");
         $("#merchantSid2").val("");
         $("input[name='postage2']").get(0).checked = true;
+        searchUnionPayStoreByCriteria();
+
+
+
     }
 
     var unionPayStoreCriteria = {};
@@ -631,6 +635,8 @@
         $("#userGeneralACommission").val("");
         $("#unionPayStoreId").val("");
         $("input[name='postage']").get(0).checked = true;
+        searchUnionPayStoreByCriteria();
+
     }
     function showModal() {
         $('#myModal').modal({

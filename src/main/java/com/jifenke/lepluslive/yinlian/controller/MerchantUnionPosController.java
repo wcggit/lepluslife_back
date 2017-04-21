@@ -36,7 +36,7 @@ public class MerchantUnionPosController {
         } else {
             List<MerchantUnionPos> merchantUnionPosList = merchantUnionPosService.findListByMerchantId(merchant.getId());
             if (merchantUnionPosList.size() > 0) {
-                return LejiaResult.build(501, "乐加门店信息重复");
+                return LejiaResult.build(501, "银联商务结算规则已存在，pos添加成功");
             } else {
                 MerchantUnionPos merchantUnionPos = new MerchantUnionPos();
                 merchantUnionPos.setCommission(BigDecimal.valueOf(Double.valueOf(merchantUnionPosCriteria.getCommission())));
@@ -62,14 +62,14 @@ public class MerchantUnionPosController {
         MerchantUnionPos merchantUnionPos = merchantUnionPosService.findById(merchantUnionPosCriteria.getMerchantUnionPosId());
         Merchant merchant2 = merchantService.findMerchantByMerchantSid(merchantSid);
         if (merchantUnionPos == null) {
-            return LejiaResult.build(501, "未找到相关乐加门店信息");
+            return LejiaResult.build(501, "未找到相关银联商务结算规则");
         } else {
             if (merchant2 == null) {
                 return LejiaResult.build(501, "未找到相关乐加门店信息");
             } else {
                 List<MerchantUnionPos> merchantUnionPosList = merchantUnionPosService.findListByMerchantId(merchant2.getId());
                 if (merchantUnionPosList.size() > 1) {
-                    return LejiaResult.build(501, "乐加门店信息重复");
+                    return LejiaResult.build(501, "乐加门店相关的银联商务结算规则信息重复，联系管理员");
                 } else {
                     merchantUnionPos.setCommission(BigDecimal.valueOf(Double.valueOf(merchantUnionPosCriteria.getCommission())));
                     merchantUnionPos.setMerchantId(merchant2.getId());
