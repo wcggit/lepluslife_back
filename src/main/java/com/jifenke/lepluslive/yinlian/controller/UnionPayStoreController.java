@@ -51,16 +51,20 @@ public class UnionPayStoreController {
         List<Map> shops = (List<Map>) map.get("shops");
         if (shops == null||shops.size()==0) {
           return LejiaResult.build(501, "未找到相关门店信息");
-        } else if (shops.size() > 1) {
-          return LejiaResult.build(502, "异常,找到" + shops.size() + "个相关门店信息");
-        }
-        Map shop = shops.get(0);
-        try {
-          Map map2=unionPayStoreService.saveStore(shop, unionPayStore);
-          System.out.println(map2.toString());
-        } catch (Exception e) {
-          e.printStackTrace();
-          return LejiaResult.build(503, "数据存储异常");
+        }else {
+            for(Map shop :shops){
+              String shopNumber=shop.get("shop_no").toString();
+              UnionPayStore unionPayStore2=unionPayStoreService.findUnionPayStoreByShopNumber(shopNumber);
+              if(unionPayStore2==null){
+                try {
+                  Map map2=unionPayStoreService.saveStore(shop, unionPayStore);
+                  System.out.println(map2.toString());
+                } catch (Exception e) {
+                  e.printStackTrace();
+                  return LejiaResult.build(503, "数据存储异常");
+                }
+              }
+            }
         }
       } else {
         return LejiaResult

@@ -17,11 +17,11 @@ public class UnionBankCard {
 
     private String userSid;//乐加会员编号
 
-    private Integer registerWay = 1;  //注册途径  1=app|2=pos|3=手动
+    private Integer registerWay = 1;  //注册途径  1=app|2=pos|3=手动|4=公众号
 
     private Date createDate;
 
-    private Integer state = 1;  //状态  1=已注册|0=未注册
+    private Integer state = 0;  //状态  1=已注册|0=未注册|2=取消注册
 
     private String phoneNumber; // 注册手机号
 

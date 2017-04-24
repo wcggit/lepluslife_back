@@ -13,6 +13,15 @@ public class MerchantUnionPosCriteria {
     private String userGeneralACommission;
     private Boolean useCommission;
     private Long merchantUnionPosId;
+    private Integer isNonCardCommission;
+
+    public Integer getIsNonCardCommission() {
+        return isNonCardCommission;
+    }
+
+    public void setIsNonCardCommission(Integer isNonCardCommission) {
+        this.isNonCardCommission = isNonCardCommission;
+    }
 
     public String getMerchantSid() {
         return merchantSid;

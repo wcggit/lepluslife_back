@@ -11,4 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface UnionBankCardRepository extends JpaRepository<UnionBankCard, Long> {
     Page findAll(Specification<UnionBankCard> whereClause, Pageable pageRequest);
+
+    UnionBankCard  findUnionBankCardByNumber(String number);
 }

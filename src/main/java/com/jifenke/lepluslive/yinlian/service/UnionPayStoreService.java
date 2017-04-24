@@ -243,4 +243,10 @@ public class UnionPayStoreService {
     return repository.findOne(id);
   }
 
+
+  public UnionPayStore findUnionPayStoreByShopNumber(String shopNumber) {
+    return repository.findUnionPayStoreByShopNumber(shopNumber);
+  }
+
+
 }
