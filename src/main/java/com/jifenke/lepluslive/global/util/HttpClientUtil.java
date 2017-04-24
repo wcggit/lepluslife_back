@@ -118,7 +118,7 @@ public class HttpClientUtil {
     return body;
   }
 
-  private static HttpResponse sendRequest(DefaultHttpClient httpclient,
+  private static HttpResponse   sendRequest(DefaultHttpClient httpclient,
                                           HttpUriRequest httpost, String charset) {
     HttpResponse response = null;
     try {
