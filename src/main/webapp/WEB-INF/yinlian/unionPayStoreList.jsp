@@ -213,11 +213,27 @@
 
                     <tr>
                         <td>
+                            <label>会员订单是否收佣金？</label>
+                        </td>
+                        <td>
                             <input type="radio" name="postage" value="1" checked="checked"><span>收佣金</span> &nbsp;&nbsp;
                             &nbsp;&nbsp; &nbsp;&nbsp;
                         </td>
                         <td>
                             <input type="radio" name="postage" value="0" class="checked"><span>不收佣金</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>微信支付宝否收佣金？</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="isNonCardCommission" value="1" checked="checked"><span>收佣金</span> &nbsp;&nbsp;
+                            &nbsp;&nbsp; &nbsp;&nbsp;
+                        </td>
+                        <td>
+
+                            <input type="radio" name="isNonCardCommission" value="0" class="checked"><span>不收佣金</span>
                         </td>
                     </tr>
                     <tr>
@@ -299,13 +315,31 @@
                     <br>
                     <tr>
                         <td>
+                            <label>会员订单是否收佣金？</label>
+                        </td>
+                        <td>
                             <input type="radio" name="postage2" value="1" checked="checked"><span>收佣金</span> &nbsp;&nbsp;
                             &nbsp;&nbsp; &nbsp;&nbsp;
                         </td>
                         <td>
+
                             <input type="radio" name="postage2" value="0" class="checked"><span>不收佣金</span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <label>微信支付宝否收佣金？</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="isNonCardCommission2" value="1" checked="checked"><span>收佣金</span> &nbsp;&nbsp;
+                            &nbsp;&nbsp; &nbsp;&nbsp;
+                        </td>
+                        <td>
+
+                            <input type="radio" name="isNonCardCommission2" value="0" class="checked"><span>不收佣金</span>
+                        </td>
+                    </tr>
+
                     <br>
                     <tr>
                         <label class="form-label">会员佣金订单发红包比</label>
@@ -373,6 +407,7 @@
         if (useCommission == "0") {
             merchantUnionPosCriteria.useCommission = false;
         }
+        merchantUnionPosCriteria.isNonCardCommission=$("input[name=isNonCardCommission2]:checked").val();
 
         $.ajax({
             type: "get",
@@ -428,6 +463,7 @@
         $("#userGeneralACommission2").val("");
         $("#merchantSid2").val("");
         $("input[name='postage2']").get(0).checked = true;
+        $("input[name='isNonCardCommission2']").get(0).checked = true;
         searchUnionPayStoreByCriteria();
 
 
@@ -543,6 +579,11 @@
                                 } else {
                                     $("input[name='postage']").get(1).checked = true;
                                 }
+                                if (merchantUnionPos.isNonCardCommission==1) {
+                                    $("input[name='isNonCardCommission']").get(0).checked = true;
+                                } else {
+                                    $("input[name='isNonCardCommission']").get(1).checked = true;
+                                }
                                 $("#shopName").val(unionPayStore.shopName);
                                 $("#merchantAddress").val(unionPayStore.address);
                                 $("#merchantSid").val(unionPayStore.merchant.merchantSid + "(" + unionPayStore.merchant.name + ")");
@@ -592,6 +633,7 @@
         merchantUnionPosCriteria.userScoreARebate = $("#userScoreARebate").val();
         merchantUnionPosCriteria.userScoreBRebate = $("#userScoreBRebate").val();
         merchantUnionPosCriteria.userGeneralACommission = $("#userGeneralACommission").val();
+        merchantUnionPosCriteria.isNonCardCommission=$("input[name=isNonCardCommission]:checked").val();
         var useCommission = $("input[name=postage]:checked").val();
         if (useCommission == "1") {
             merchantUnionPosCriteria.useCommission = true;
@@ -635,6 +677,7 @@
         $("#userGeneralACommission").val("");
         $("#unionPayStoreId").val("");
         $("input[name='postage']").get(0).checked = true;
+        $("input[name='isNonCardCommission']").get(0).checked = true;
         searchUnionPayStoreByCriteria();
 
     }

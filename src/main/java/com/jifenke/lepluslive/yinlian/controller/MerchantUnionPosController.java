@@ -47,6 +47,7 @@ public class MerchantUnionPosController {
                 merchantUnionPos.setUserScoreARebate(BigDecimal.valueOf(Double.valueOf(merchantUnionPosCriteria.getUserScoreARebate())));
                 merchantUnionPos.setUserScoreBRebate(BigDecimal.valueOf(Double.valueOf(merchantUnionPosCriteria.getUserScoreBRebate())));
                 merchantUnionPos.setUserGeneralACommission(BigDecimal.valueOf(Double.valueOf(merchantUnionPosCriteria.getUserGeneralACommission())));
+                merchantUnionPos.setIsNonCardCommission(merchantUnionPosCriteria.getIsNonCardCommission());
                 merchantUnionPosService.saveOne(merchantUnionPos);
             }
         }
@@ -79,6 +80,7 @@ public class MerchantUnionPosController {
                     merchantUnionPos.setUserScoreARebate(BigDecimal.valueOf(Double.valueOf(merchantUnionPosCriteria.getUserScoreARebate())));
                     merchantUnionPos.setUserScoreBRebate(BigDecimal.valueOf(Double.valueOf(merchantUnionPosCriteria.getUserScoreBRebate())));
                     merchantUnionPos.setUserGeneralACommission(BigDecimal.valueOf(Double.valueOf(merchantUnionPosCriteria.getUserGeneralACommission())));
+                    merchantUnionPos.setIsNonCardCommission(merchantUnionPosCriteria.getIsNonCardCommission());
                     merchantUnionPosService.saveOne(merchantUnionPos);
                 }
 
