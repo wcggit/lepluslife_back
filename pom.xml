@@ -45,7 +45,8 @@
         <run.addResources>false</run.addResources>
         <shiro.version>1.2.4</shiro.version>
         <sonar-maven-plugin.version>2.6</sonar-maven-plugin.version>
-        <sonar.exclusions>src/main/webapp/assets/**/*.*, src/main/webapp/bower_components/**/*.*, src/main/webapp/dist/**/*.*</sonar.exclusions>
+        <sonar.exclusions>src/main/webapp/assets/**/*.*, src/main/webapp/bower_components/**/*.*,
+            src/main/webapp/dist/**/*.*</sonar.exclusions>
         <sonar.jacoco.itReportPath>${project.testresult.directory}/coverage/jacoco/jacoco-it.exec</sonar.jacoco.itReportPath>
         <sonar.jacoco.reportPath>${project.testresult.directory}/coverage/jacoco/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
@@ -60,7 +61,18 @@
     </properties>
 
     <dependencies>
-
+        <!--阿里云MQ-->
+        <dependency>
+            <groupId>com.aliyun.openservices</groupId>
+            <artifactId>ons-client</artifactId>
+            <version>1.6.0.Final</version>
+        </dependency>
+        <!--json转换-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.34</version>
+        </dependency>
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
@@ -137,6 +149,17 @@
             <groupId>com.zhangfu</groupId>
             <artifactId>fuiou-encrypt</artifactId>
             <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+        <!--http文件上传-->
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
         </dependency>
         <!-- The HikariCP Java Agent is disabled by default, as it is experimental
           <dependency>

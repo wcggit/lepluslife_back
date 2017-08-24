@@ -1,79 +1,92 @@
 package com.jifenke.lepluslive.printer.domain.entities;
 
-import com.jifenke.lepluslive.order.domain.entities.OffLineOrder;
-
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Created by lss on 2016/12/27.
  */
 @Entity
 @Table(name = "Receipt")
-public class Receipt  {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Receipt {
 
-    private String receiptSid;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    private Integer state; //1 成功 0失败 3补打成功 4补打失败
+  private String receiptSid;
 
-    private Date completeDate;
+  private Integer state = 0; //1 成功 0失败 3补打成功 4补打失败
 
-    @ManyToOne
-    private OffLineOrder offLineOrder;
+  private Date completeDate;
 
-    @ManyToOne
-    private Printer printer;
+  @ManyToOne
+  private Printer printer;
 
-    public Long getId() {
-        return id;
-    }
+  private String orderSid;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  private Integer type = 1; //1=乐加|2=通道
 
-    public String getReceiptSid() {
-        return receiptSid;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setReceiptSid(String receiptSid) {
-        this.receiptSid = receiptSid;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Integer getState() {
-        return state;
-    }
+  public String getReceiptSid() {
+    return receiptSid;
+  }
 
-    public void setState(Integer state) {
-        this.state = state;
-    }
+  public void setReceiptSid(String receiptSid) {
+    this.receiptSid = receiptSid;
+  }
 
-    public Date getCompleteDate() {
-        return completeDate;
-    }
+  public Integer getState() {
+    return state;
+  }
 
-    public void setCompleteDate(Date completeDate) {
-        this.completeDate = completeDate;
-    }
+  public void setState(Integer state) {
+    this.state = state;
+  }
 
-    public OffLineOrder getOffLineOrder() {
-        return offLineOrder;
-    }
+  public Date getCompleteDate() {
+    return completeDate;
+  }
 
-    public void setOffLineOrder(OffLineOrder offLineOrder) {
-        this.offLineOrder = offLineOrder;
-    }
+  public void setCompleteDate(Date completeDate) {
+    this.completeDate = completeDate;
+  }
 
-    public Printer getPrinter() {
-        return printer;
-    }
+  public Printer getPrinter() {
+    return printer;
+  }
 
-    public void setPrinter(Printer printer) {
-        this.printer = printer;
-    }
+  public void setPrinter(Printer printer) {
+    this.printer = printer;
+  }
 
+  public String getOrderSid() {
+    return orderSid;
+  }
+
+  public void setOrderSid(String orderSid) {
+    this.orderSid = orderSid;
+  }
+
+  public Integer getType() {
+    return type;
+  }
+
+  public void setType(Integer type) {
+    this.type = type;
+  }
 }
 

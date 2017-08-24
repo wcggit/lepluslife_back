@@ -1,12 +1,10 @@
 package com.jifenke.lepluslive.merchant.controller;
 
-import com.jifenke.lepluslive.global.util.JsonUtils;
 import com.jifenke.lepluslive.global.util.LejiaResult;
 import com.jifenke.lepluslive.global.util.MvUtil;
 import com.jifenke.lepluslive.merchant.controller.dto.MerchantUserDto;
 import com.jifenke.lepluslive.merchant.domain.criteria.MerchantUserCriteria;
 import com.jifenke.lepluslive.merchant.domain.entities.City;
-import com.jifenke.lepluslive.merchant.domain.entities.Merchant;
 import com.jifenke.lepluslive.merchant.domain.entities.MerchantUser;
 import com.jifenke.lepluslive.merchant.service.CityService;
 import com.jifenke.lepluslive.merchant.service.MerchantService;
@@ -18,14 +16,20 @@ import com.jifenke.lepluslive.partner.service.PartnerService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.inject.Inject;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
 
 /**
  * Created by xf on 16-11-16.
@@ -252,5 +256,15 @@ public class MerchantUserController {
     public LejiaResult deleteMerchantUser(@PathVariable Long id) {
         merchantUserService.deleteMerchantUser(id);
         return LejiaResult.ok();
+    }
+
+    /**
+     *  获取所有商户  2017/06/26
+     */
+    @RequestMapping(value="/merchantUser/findAll",method = RequestMethod.GET)
+    @ResponseBody
+    public LejiaResult findAllMerchantUser() {
+        List<MerchantUser> merchantUserList = merchantUserService.findAllManager();
+        return LejiaResult.ok(merchantUserList);
     }
 }

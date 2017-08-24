@@ -1,6 +1,7 @@
 package com.jifenke.lepluslive.merchant.service;
 
-import com.jifenke.lepluslive.fuyou.service.ScanCodeOrderService;
+import com.jifenke.lepluslive.merchant.domain.entities.TemporaryMerchantUserShop;
+import com.jifenke.lepluslive.order.service.ScanCodeOrderService;
 import com.jifenke.lepluslive.global.util.MD5Util;
 import com.jifenke.lepluslive.merchant.domain.criteria.MerchantUserCriteria;
 import com.jifenke.lepluslive.merchant.domain.entities.City;
@@ -73,6 +74,9 @@ public class MerchantUserService {
   @Inject
   private PosOrderService posOrderService;
 
+  @Inject
+  private TemporaryMerchantUserShopService temporaryMerchantUserShopService;
+
   /**
    * 创建子账号
    *    - 设置类型
@@ -99,6 +103,11 @@ public class MerchantUserService {
     MerchantBank merchantBank = merchantUser.getMerchantBank();              // 保存商户银行信息
     merchantBankRepository.save(merchantBank);
     merchantUserRepository.save(merchantUser);
+    // 判断创建者是否为空,如果为主商户，创建者为自身
+    if(merchantUser.getCreateUserId()==null) {
+      merchantUser.setCreateUserId(merchantUser.getId());
+      merchantUserRepository.save(merchantUser);
+    }
   }
 
   /**
@@ -417,7 +426,11 @@ public class MerchantUserService {
     origin.setName(merchantUser.getName());
     origin.setType(merchantUser.getType());
     merchantUserRepository.save(origin);
-
+    // 判断创建者是否为空,如果为管理员，创建者为自身
+    if(origin.getCreateUserId()==null) {
+      origin.setCreateUserId(origin.getId());
+      merchantUserRepository.save(origin);
+    }
     List<MerchantUserShop> dels = merchantUserShopService.countByMerchantUser(origin);
     for (MerchantUserShop shop : dels) {
       merchantUserShopService.deleteShop(shop);
@@ -434,13 +447,19 @@ public class MerchantUserService {
    *
    * @param id 账号ID
    */
-  @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+  @Transactional(propagation = Propagation.REQUIRED)
   public void deleteMerchantUser(Long id) {
     MerchantUser user = merchantUserRepository.findOne(id);
     merchantWeiXinUserService.unBindMerchantUser(user);
     List<MerchantUserShop> dels = merchantUserShopService.countByMerchantUser(user);
     for (MerchantUserShop shop : dels) {
       merchantUserShopService.deleteShop(shop);
+    }
+    List<TemporaryMerchantUserShop>
+        userShops =
+        temporaryMerchantUserShopService.findAllByMerchantUser(user);
+    for (TemporaryMerchantUserShop userShop : userShops) {
+      temporaryMerchantUserShopService.deleteShop(userShop);
     }
     merchantUserRepository.delete(user);
   }
@@ -464,11 +483,12 @@ public class MerchantUserService {
 ////    }
 //    return map;
 //  }
+
   /**
-   *  根据名称查询商户（门店管理员）
+   * 根据名称查询商户（门店管理员）
    */
-  @Transactional(readOnly = true,propagation = Propagation.REQUIRED)
+  @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
   public MerchantUser findMerchantManagerByName(String name) {
-    return merchantUserRepository.findMerchantUserByType(name,8);
+    return merchantUserRepository.findMerchantUserByType(name, 8);
   }
 }

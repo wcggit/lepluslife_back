@@ -1,6 +1,7 @@
 package com.jifenke.lepluslive.merchant.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jifenke.lepluslive.global.util.MvUtil;
 import com.jifenke.lepluslive.partner.domain.entities.Partner;
 
 import javax.persistence.*;
@@ -156,12 +157,28 @@ public class MerchantUser {
         this.merchantName = merchantName;
     }
 
+    public MerchantUser(Long id,String name,String merchantName) {
+        this.id = id;
+        this.name = name;
+        this.merchantName = merchantName;
+    }
+
     public Partner getPartner() {
         return partner;
     }
 
     public void setPartner(Partner partner) {
         this.partner = partner;
+    }
+
+    private String merchantSid = MvUtil.getMerchantUserSid();
+
+    public String getMerchantSid() {
+        return merchantSid;
+    }
+
+    public void setMerchantSid(String merchantSid) {
+        this.merchantSid = merchantSid;
     }
 
 }

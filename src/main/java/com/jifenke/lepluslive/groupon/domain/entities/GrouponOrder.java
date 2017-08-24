@@ -5,7 +5,9 @@ import com.jifenke.lepluslive.user.domain.entities.LeJiaUser;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,28 +37,34 @@ public class GrouponOrder {
   @ManyToOne
   private LeJiaUser leJiaUser;
 
-  private Long totalPrice=0L;
+  private Long totalPrice = 0L;
 
-  private Long truePay=0L;
+  private Long truePay = 0L;
 
-  private Long scorea=0L; //使用鼓励金
+  private Long scorea = 0L; //使用鼓励金
 
-  private Long state=0L;  //0 未付款 1 已完成
+  private Long state = 0L;  //0 未付款 1 已完成
 
-  private Long rebateScorea=0L;
+  private Integer orderState = 0;  // 0=待使用  1=已使用  2=退款
 
-  private Long rebateScorec=0L;
+  private Long rebateScorea = 0L;
 
-  private Long orderType=0L; // 订单类型 0 普通订单 1 乐加订单
+  private Long rebateScorec = 0L;
+
+  private Long orderType = 0L; // 订单类型 0 普通订单 1 乐加订单
 
   @ManyToOne
   private GrouponProduct grouponProduct;
 
-  private Integer payOrigin=0; //0 公众号 1 app
+  private Integer payOrigin = 0; //0 公众号 1 app
 
-  @OneToMany
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "grouponOrder")
   private List<GrouponCode> grouponCodes; //一个订单可能对应多个团购码
 
+  //以下为冗余字段
+  private Date expiredDate; //过期时间
+
+  private Integer buyNum = 1;  //购买数量
 
   public Long getId() {
     return id;
@@ -122,4 +130,91 @@ public class GrouponOrder {
     this.rebateScorec = rebateScorec;
   }
 
+  public String getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
+
+  public Date getCreateDate() {
+    return createDate;
+  }
+
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
+  }
+
+  public Date getCompleteDate() {
+    return completeDate;
+  }
+
+  public void setCompleteDate(Date completeDate) {
+    this.completeDate = completeDate;
+  }
+
+  public Long getState() {
+    return state;
+  }
+
+  public void setState(Long state) {
+    this.state = state;
+  }
+
+  public Long getOrderType() {
+    return orderType;
+  }
+
+  public void setOrderType(Long orderType) {
+    this.orderType = orderType;
+  }
+
+  public GrouponProduct getGrouponProduct() {
+    return grouponProduct;
+  }
+
+  public void setGrouponProduct(GrouponProduct grouponProduct) {
+    this.grouponProduct = grouponProduct;
+  }
+
+  public Integer getPayOrigin() {
+    return payOrigin;
+  }
+
+  public void setPayOrigin(Integer payOrigin) {
+    this.payOrigin = payOrigin;
+  }
+
+  public List<GrouponCode> getGrouponCodes() {
+    return grouponCodes;
+  }
+
+  public void setGrouponCodes(List<GrouponCode> grouponCodes) {
+    this.grouponCodes = grouponCodes;
+  }
+
+  public Integer getOrderState() {
+    return orderState;
+  }
+
+  public void setOrderState(Integer orderState) {
+    this.orderState = orderState;
+  }
+
+  public Date getExpiredDate() {
+    return expiredDate;
+  }
+
+  public void setExpiredDate(Date expiredDate) {
+    this.expiredDate = expiredDate;
+  }
+
+  public Integer getBuyNum() {
+    return buyNum;
+  }
+
+  public void setBuyNum(Integer buyNum) {
+    this.buyNum = buyNum;
+  }
 }

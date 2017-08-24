@@ -5,7 +5,6 @@ import com.jifenke.lepluslive.merchant.domain.entities.Merchant;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,12 +22,12 @@ public class GrouponStatistic {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
+  private Long id;
 
   @ManyToOne
   private Merchant merchant;
 
-  private Long check; //核销几笔
+  private Long checkNum; //核销几笔
 
   private Long totalMoney;//算上佣金总价
 
@@ -36,17 +35,16 @@ public class GrouponStatistic {
 
   private Long transferMoney; //转账金额
 
-  private Date balanceDate = new Date(); //结算日期
+  private Date balanceDate; //结算日期
 
   private Date completeDate;
 
-  @Column(unique = true)
-  private String sid = MvUtil.getRandomNumber(12);
+  private String sid = MvUtil.getOrderNumber(6);
 
   @Version
   private Long version = 0L;
 
-  private Integer state = 0;
+  private Integer state = 0;  //0=待结算|1=已结算|2=已挂账待结算
 
   public Long getTotalMoney() {
     return totalMoney;
@@ -88,11 +86,11 @@ public class GrouponStatistic {
     this.version = version;
   }
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -104,12 +102,12 @@ public class GrouponStatistic {
     this.merchant = merchant;
   }
 
-  public Long getCheck() {
-    return check;
+  public Long getCheckNum() {
+    return checkNum;
   }
 
-  public void setCheck(Long check) {
-    this.check = check;
+  public void setCheckNum(Long checkNum) {
+    this.checkNum = checkNum;
   }
 
   public Long getTransferMoney() {

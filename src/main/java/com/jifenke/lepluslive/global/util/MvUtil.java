@@ -36,6 +36,16 @@ public class MvUtil {
     return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + randomStr + "." + extendName;
   }
 
+  //随机生成没有文件后缀有前缀的文件名
+  public static String getFileName(String prefix) {
+    String
+        randomStr =
+        RandomStringUtils
+            .random(2, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
+
+    return prefix + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + randomStr;
+  }
+
 
   //生成订单号
   public static String getOrderNumber() {
@@ -61,11 +71,16 @@ public class MvUtil {
 
   }
 
-  //生成提现单随机号
-  public static String getWithdrawBillSid() {
-    String randomStr = RandomStringUtils.random(5, "1234567890");
+  /**
+   * 生成时间戳+n位随机数
+   *
+   * @param random 随机位数
+   */
+  public static String getOrderNumber(int random) {
+    String randomStr = RandomStringUtils.random(random, "1234567890");
     return new SimpleDateFormat("yyMMddHHmmss").format(new Date()) + randomStr;
   }
+
   public static String getMerchantUserSid() {
     return RandomStringUtils.randomAlphanumeric(7);                 // 字母和数字的随机组合字符串 [7位]
   }
